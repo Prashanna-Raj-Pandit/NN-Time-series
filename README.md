@@ -14,7 +14,7 @@ We build a multimodal neural network with three inputs (side-view series, front-
 * Front features (249×4): We take the 3 front-view features (R_Adduction_Abduction, L_Adduction_Abduction, Step_Width) plus the encoded direction, then pad/truncate to 249 frames.
 * Static (univariate) features (3 per subject): We compute three summary features per subject (for example, cadence, stride length, step length,velocity). This yields a (53, 3) array aligned with subjects.
 * Align labels: We extract the binary label for each subject (0 = non-autistic, 1 = autistic) from one of the datasets (they should agree).
-* Train-test split: We split the 53 subjects 80/20 (e.g. 42 train, 11 test) to ensure no subject overlap, using sklearn.model_selection.train_test_split.
+* Train-test split: We split the 53 subjects 80/20 (e.g. 42 train, 11 test) to ensure no subject overlap, using *sklearn.model_selection.train_test_split*.
 
 ## Model Architecture
 
@@ -28,4 +28,8 @@ This yields a fixed-length feature vector for the side-view input.
 These three outputs are concatenated and fed into further Dense layers for classification. Finally, a single-unit sigmoid outputs the probability of autism. We compile with the Adam optimizer and binary cross-entropy loss.
 
 ![DL_Model](https://github.com/user-attachments/assets/2179e646-5cc7-49f8-9cc3-5b98adf4ebb7)
+
+## Training with Callbacks
+
+We train the model on the training split (42 subjects) and monitor validation loss for early stopping. We use an 80-20 train-test split, and reserve 10% of the training data for validation. We include *EarlyStopping* to prevent overfitting and *ModelCheckpoint* to save the best model.
 
