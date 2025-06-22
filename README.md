@@ -6,8 +6,8 @@ source: keras https://keras.io/examples/timeseries/timeseries_classification_fro
 ## 2. gait analysis
 We build a multimodal neural network with three inputs (side-view series, front-view series, and static features) that outputs a binary diagnosis. First, we prepare the data, then define separate subnetworks for each input, concatenate their outputs, and train the combined model with appropriate callbacks. Finally, we evaluate on a held-out test set.
 
-Data Preparation
-Load the CSV files: We use pandas to read the side-view and front-view CSVs. Each row has (subject, frame, label, plus features).
+## Data Preparation
+* Load the CSV files: We use pandas to read the side-view and front-view CSVs. Each row has (subject, frame, label, plus features).
 Sort and encode: For each subject, we sort by frame. The Direction column is categorical, so we encode it as numeric (e.g. left=0, right=1, stationary=2 for side view; towards=0, backwards=1 for front).
 Extract numeric features:
 Side features (300×9): We take the 8 angle-related columns and the encoded direction. This gives 9 features per timestep. We pad or truncate each subject’s series to length 300.
