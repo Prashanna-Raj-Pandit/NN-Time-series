@@ -26,3 +26,6 @@ This yields a fixed-length feature vector for the side-view input.
 * Front-view branch: Input shape (249, 4). We similarly use Conv1D layers (with smaller filters, e.g. 16 and 32 filters) and pooling, ending in GlobalAveragePooling.
 * Univariate branch: Input shape (3,). We use a small Dense network, e.g. Dense(32, relu) → Dropout → Dense(16, relu).
 These three outputs are concatenated and fed into further Dense layers for classification. Finally, a single-unit sigmoid outputs the probability of autism. We compile with the Adam optimizer and binary cross-entropy loss.
+
+![DL_Model](https://github.com/user-attachments/assets/2179e646-5cc7-49f8-9cc3-5b98adf4ebb7)
+
